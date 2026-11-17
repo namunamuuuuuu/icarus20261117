@@ -5,3 +5,18 @@
 body{overflow-x:hidden}.main{min-width:0}.article-body img{max-width:100%;height:auto}.note-card:focus-visible,.nav-item:focus-visible,.chip:focus-visible,.button:focus-visible{outline:3px solid #729478;outline-offset:3px}
 @media(max-width:760px){.hero{padding:30px 24px}.hero-decoration{opacity:.35}.hero h1{position:relative;z-index:1}.section-heading{gap:13px}.reader{width:100%;padding:0 2px}.reader h1{font-size:clamp(26px,7vw,36px)}.article-body{font-size:14px;line-height:2.15}.sidebar{overflow-y:auto}.search-wrap input{font-size:16px}.topbar{gap:10px}.header-actions{margin-left:auto}.notes-grid{gap:12px}}
 @media(max-width:380px){.hero h1{font-size:28px}.hero{padding:28px 20px}.topbar{padding:0 15px}.site-footer{font-size:9px}}
+
+/* 読んでほしい本：公開サイト用 */
+[hidden]{display:none!important}
+.book-request-section{width:min(1120px,calc(100% - 2 * clamp(24px,5vw,82px)));margin:56px auto 0}
+.book-request-inner{max-width:760px;margin:auto;padding:32px 36px;background:#f0f1eb;border:1px solid #e3e7dd;border-radius:10px}
+.book-request-inner h2{font-family:'Noto Serif JP',serif;font-size:25px;font-weight:500;margin:0 0 10px}
+.book-request-description{font-size:12px;color:#7e857a;line-height:1.9;margin:0 0 18px}
+.book-request-label{display:block;font-size:12px;font-weight:600;color:#5f6e60;margin:0 0 8px}
+#book-request-message{display:block;width:100%;box-sizing:border-box;resize:vertical;min-height:105px;padding:14px 16px;background:#fff;border:1px solid #d8ddd3;border-radius:6px;line-height:1.8;color:var(--ink);font-size:16px}
+#book-request-message:focus{outline:2px solid #a9b8a9;outline-offset:1px}
+.book-request-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px}
+#book-request-count{color:#949b90;font-size:11px}
+#book-request-submit:disabled{opacity:.7;cursor:wait}
+.book-request-result{font-family:'Noto Serif JP',serif;text-align:center;padding:34px 5px;font-size:20px;color:var(--green)}
+@media(max-width:760px){.book-request-section{width:calc(100% - 38px);margin:32px auto 0}.book-request-inner{padding:25px 20px}.book-request-inner h2{font-size:23px}}

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="日々の考えを綴る、シンプルな文章ノート。" />
+  <title>余白｜My Notes</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="メインナビゲーション">
+      <a class="brand" href="#home" aria-label="余白 ホーム"><span class="brand-mark">余</span><span><strong>余白</strong><small>MY PERSONAL NOTES</small></span></a>
+      <div class="sidebar-label">LIBRARY</div>
+      <nav class="nav" id="navigation">
+        <button class="nav-item active" data-view="home"><span class="nav-symbol">⌂</span> すべての文章 <span id="all-count" class="nav-number">0</span></button>
+        <button class="nav-item" data-view="favorites"><span class="nav-symbol">♡</span> お気に入り</button>
+        <button class="nav-item" data-view="drafts"><span class="nav-symbol">▤</span> 下書き <span id="draft-count" class="nav-number">0</span></button>
+      </nav>
+      <div class="sidebar-label spaced">CATEGORIES</div>
+      <div id="category-nav" class="nav category-nav"></div>
+      <div class="sidebar-bottom">
+        <div class="privacy-note"><span class="tiny-dot"></span><span>この試作品の保存先は<br />このブラウザ内です</span></div>
+        <button class="text-link" id="open-settings">データ管理 <span>↗</span></button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobile-menu" aria-label="メニューを開く">☰</button>
+        <div class="breadcrumb">MY SPACE <span>/</span> <span id="breadcrumb-current">すべての文章</span></div>
+        <div class="header-actions"><span class="storage-label">LOCAL DEMO</span><button class="button button-dark" id="new-note-top">＋ 新しく書く</button></div>
+      </header>
+
+      <section id="list-view" class="view">
+        <div class="hero"><p class="eyebrow">THOUGHTS, WRITTEN DOWN.</p><h1>思考に、<em>余白</em>を。</h1><p class="hero-subtitle">浮かんだ言葉も、まとまらない考えも。<br />ここに少しずつ、書き残していく。</p><button class="hero-link" id="new-note-hero">文章を書きはじめる <span>↗</span></button><div class="hero-decoration" aria-hidden="true">✳</div></div>
+        <div class="section-heading"><div><span class="eyebrow">THE ARCHIVE</span><h2 id="list-heading">すべての文章 <span id="result-count" class="light-number">0</span></h2></div><div class="search-wrap"><span aria-hidden="true">⌕</span><input type="search" id="search-input" placeholder="タイトル・本文から検索" aria-label="文章を検索" /></div></div>
+        <div class="filter-row"><div id="filter-chips" class="filter-chips"></div><select id="sort-select" aria-label="並び替え"><option value="updated">更新が新しい順</option><option value="oldest">更新が古い順</option><option value="title">タイトル順</option></select></div>
+        <div class="notes-grid" id="notes-grid"></div>
+        <div id="empty-state" class="empty-state hidden"><div class="empty-icon">✎</div><h3>ここにはまだ文章がありません</h3><p>思いついたことを、最初の一行から。</p><button class="button button-outline" id="empty-create">最初の文章を書く</button></div>
+      </section>
+
+      <section id="read-view" class="view hidden"><button class="back-button" id="read-back">← 一覧に戻る</button><article class="reader"><div class="reader-meta" id="reader-meta"></div><h1 id="reader-title"></h1><p class="reader-excerpt" id="reader-excerpt"></p><div class="reader-rule"></div><div class="article-body" id="reader-body"></div><div class="reader-footer"><div id="reader-tags" class="tag-list"></div><div class="reader-actions"><button class="button button-outline" id="reader-favorite">♡ お気に入り</button><button class="button button-dark" id="reader-edit">文章を編集</button></div></div></article></section>
+
+      <section id="editor-view" class="view hidden"><div class="editor-toolbar"><button class="back-button" id="editor-back">← 一覧に戻る</button><div class="editor-actions"><span id="save-status" class="save-status">未保存</span><button class="button button-outline" id="save-draft">下書き保存</button><button class="button button-dark" id="publish-note">公開状態で保存</button></div></div><div class="editor-shell"><div class="editor-header"><span class="eyebrow">WRITE YOUR THOUGHTS</span><h1>新しい文章</h1><p>形式にとらわれず、思いのままに。</p></div><form id="note-form"><label for="note-title">タイトル</label><input id="note-title" class="title-input" maxlength="140" placeholder="まだ名前のない考え" required /><label for="note-excerpt">一言の紹介 <span class="optional">任意</span></label><input id="note-excerpt" placeholder="この文章について、短く" maxlength="220" /><div class="form-inline"><div><label for="note-category">カテゴリー</label><select id="note-category"><option>日記</option><option>哲学</option><option>読書</option><option>科学</option><option>その他</option></select></div><div><label for="note-tags">タグ <span class="optional">カンマ区切り</span></label><input id="note-tags" placeholder="思考, 気づき" /></div></div><div class="content-label"><label for="note-content">本文 <span class="optional">Markdown対応</span></label><div class="editor-tabs"><button type="button" class="tab active" id="tab-write">編集</button><button type="button" class="tab" id="tab-preview">プレビュー</button></div></div><textarea id="note-content" placeholder="# 見出し\n\n今日は、こんなことを考えた。\n\n**大切なこと**をここに書く。"></textarea><div id="note-preview" class="article-body preview hidden"></div><div class="editor-help"># 見出し ・ ## 小見出し ・ **太字** ・ *斜体* ・ - 箇条書き ・ [リンク](https://...)</div><div class="editor-bottom"><button type="button" class="delete-button hidden" id="delete-note">この文章を削除</button><span id="word-count">0 文字</span></div></form></div></section>
+
+      <section id="settings-view" class="view hidden"><button class="back-button" id="settings-back">← 一覧に戻る</button><div class="settings-panel"><p class="eyebrow">SETTINGS & DATA</p><h1>データ管理</h1><p>文章は現在、このブラウザの localStorage に保存されています。別端末との同期や、他の人への公開はまだ行われません。</p><div class="settings-card"><h3>データを書き出す</h3><p>すべての文章をJSON形式で保存します。バックアップとしてお使いください。</p><button id="export-data" class="button button-dark">JSONをダウンロード</button></div><div class="settings-card"><h3>データを読み込む</h3><p>このアプリから書き出したJSONデータを復元します。同じIDの文章は上書きされます。</p><label for="import-data" class="button button-outline file-button">JSONを読み込む</label><input type="file" id="import-data" accept=".json,application/json" hidden /></div><div class="settings-card caution"><h3>アクセス解析・ログイン</h3><p>本番公開時に、管理者認証とサーバー側の保存処理を追加します。アクセス解析は管理者専用の外部サービスと接続します。この試作品では実際の訪問データを収集していません。</p></div></div></section>
+      <footer class="site-footer"><span>© <span id="footer-year"></span> 余白 — a place for thoughts.</span><span>MADE WITH WORDS & SILENCE</span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

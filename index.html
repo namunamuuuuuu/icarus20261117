@@ -53,11 +53,11 @@
         <div class="book-request-inner">
           <p class="eyebrow">BOOK REQUEST</p>
           <h2>読んでほしい本</h2>
-          <p class="book-request-description">読んでほしい本があれば、こちらから送ってください。</p>
+          
           <form id="book-request-form">
-            <label class="book-request-label" for="book-request-message">本のタイトル・ひとこと</label>
-            <textarea id="book-request-message" name="message" maxlength="100" rows="3" required placeholder="読んでほしい本のタイトルなど（100文字以内）"></textarea>
-            <div class="book-request-controls"><small id="book-request-count">0 / 100</small><button id="book-request-submit" class="button button-dark" type="submit">送信する</button></div>
+            <label class="book-request-label" for="book-request-message">本の名称を書いてください</label>
+            <textarea id="book-request-message" name="message" maxlength="10000" rows="3" required></textarea>
+            <div class="book-request-controls"><small id="book-request-count">0 / 10000</small><button id="book-request-submit" class="button button-dark" type="submit">送信する</button></div>
           </form>
           <p id="book-request-result" class="book-request-result" role="status" aria-live="polite" hidden></p>
         </div>
@@ -82,8 +82,8 @@
   section.hidden = false;
   const length = () => Array.from(input.value).length;
   input.addEventListener('input', () => {
-    if (length() > 100) input.value = Array.from(input.value).slice(0, 100).join('');
-    count.textContent = length() + ' / 100';
+    if (length() > 10000) input.value = Array.from(input.value).slice(0, 10000).join('');
+    count.textContent = length() + ' / 10000';
   });
   function checkSaved(requestId) {
     return new Promise(resolve => {
@@ -108,7 +108,7 @@
   form.addEventListener('submit', async event => {
     event.preventDefault();
     const message = input.value.trim();
-    if (!message || Array.from(message).length > 100) { input.focus(); return; }
+    if (!message || Array.from(message).length > 10000) { input.focus(); return; }
     const requestId = crypto.randomUUID();
     submit.disabled = true;
     submit.textContent = '送信中…';
